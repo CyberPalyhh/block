@@ -8,6 +8,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Debug estructura
+        run: |
+          echo "=== Directorio actual ==="
+          pwd
+          echo "=== Contenido ==="
+          ls -la
+          echo "=== Buscando buildozer.spec ==="
+          find . -name "buildozer.spec" -type f
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
@@ -22,11 +31,13 @@ jobs:
 
       - name: Build APK
         run: |
-          cd block
+          DIR=$(dirname $(find . -name "buildozer.spec" -type f | head -1))
+          echo "Directorio del proyecto: $DIR"
+          cd "$DIR"
           yes | buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: block-apk
-          path: block/bin/*.apk
+          path: '**/bin/*.apk'
