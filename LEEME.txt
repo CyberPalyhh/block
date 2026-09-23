@@ -1,0 +1,44 @@
+INSTRUCCIONES — block.apk
+=========================
+
+ESTRUCTURA GENERADA:
+  block/
+    main.py              <- código Kivy
+    buildozer.spec       <- configuración de compilación
+    AndroidManifest.xml  <- manifiesto (referencia)
+    requirements.txt     <- dependencias Python
+    build.sh             <- script de compilación Linux/Termux
+    build_colab.ipynb    <- script de compilación Colab
+    LEEME.txt            <- este archivo
+
+PASO 1 — Compilar el APK:
+
+  Opción A: Termux (Android)
+    pkg install python openjdk-17 git
+    pip install buildozer cython
+    cd /storage/emulated/0/block
+    bash build.sh
+
+  Opción B: Linux/WSL
+    sudo apt install openjdk-17-jdk
+    pip install buildozer cython
+    cd block
+    bash build.sh
+
+  Opción C: Google Colab (gratis, en la nube)
+    Subir block.zip a Colab
+    Ejecutar celdas de build_colab.ipynb
+    Descargar APK resultante
+
+PASO 2 — El APK se genera en: block/bin/block-1.0-debug.apk
+
+PASO 3 — Instalar en Android:
+    Habilitar "Fuentes desconocidas"
+    Abrir el APK
+
+NOTA TECNICA:
+  Pydroid 3 NO compila APKs. Solo ejecuta Python.
+  Este script solo GENERA la estructura.
+  La compilación requiere buildozer + Android SDK.
+
+SECTOR 7G
